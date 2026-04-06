@@ -32,6 +32,7 @@ RUN sed -ri -e 's!/var/www/!/var/www/html/public!g' \
 
 # Enable mod_rewrite for Laravel
 RUN a2enmod rewrite
+RUN echo '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/apache2.conf
 
 # Setup environment and database FIRST
 RUN if [ ! -f .env ]; then cp .env.example .env; fi \
