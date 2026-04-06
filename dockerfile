@@ -33,7 +33,10 @@ RUN a2enmod rewrite
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage \
-    && chmod -R 775 /var/www/html/storage
+    && chown -R www-data:www-data /var/www/html/database \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/database \
+    && chmod 664 /var/www/html/database/database.sqlite
 
 # Setup environment
 RUN if [ ! -f .env ]; then cp .env.example .env; fi \
